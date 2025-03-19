@@ -2,25 +2,24 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "divyadharshini11"
+        IMAGE_NAME = "techtalkjervin/my-app"
         REGISTRY = "docker.io"
-        DOCKER_CREDENTIALS_ID = "divyadharshini11"
-        GITHUB_CREDENTIALS_ID = "DivyadharshiniA"
-        APP_DIR = "/home/vboxuser/jenkins"
-
+        DOCKER_CREDENTIALS_ID = "docker-hub-credentials"
+        GITHUB_CREDENTIALS_ID = "github-credentials"
+        APP_DIR = "/opt/docker-kec"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git credentialsId: GITHUB_CREDENTIALS_ID, url: https://github.com/DivyadharshiniA/jenkins.git, branch: 'main'
+                git credentialsId: GITHUB_CREDENTIALS_ID, url: 'https://github.com/Jervinjeno/devops-kec.git', branch: 'main'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "cd $APP_DIR && docker build -t $IMAGE_NAME:latest ."
+                    sh "docker build -t $IMAGE_NAME:latest ."
                 }
             }
         }
@@ -46,7 +45,7 @@ pipeline {
         stage('Deploy using Docker Compose') {
             steps {
                 script {
-                    sh "cd $APP_DIR && docker-compose down && docker-compose up -d"
+                    sh "docker-compose up -d"
                 }
             }
         }
