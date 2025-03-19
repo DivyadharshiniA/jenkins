@@ -4,8 +4,8 @@ pipeline {
     environment {
         IMAGE_NAME = "divyadharshini11/myapp"
         REGISTRY = "docker.io"
-        DOCKER_CREDENTIALS_ID = "docker"
-        GITHUB_CREDENTIALS_ID = "github"
+        DOCKER_CREDENTIALS_ID = "Divya@1103"
+        GITHUB_CREDENTIALS_ID = "Divya@11032004"
         APP_DIR = "/home/vboxuser/jenkins"
     }
 
