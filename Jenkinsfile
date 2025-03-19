@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "divyadharshini11/myapp"  // Updated with correct repository name
+        IMAGE_NAME = "divyadharshini11/myapp"
         REGISTRY = "docker.io"
         DOCKER_CREDENTIALS_ID = "docker"
         GITHUB_CREDENTIALS_ID = "github"
@@ -19,7 +19,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t $IMAGE_NAME:latest ."
+                    sh "docker build -t ${IMAGE_NAME}:latest ."
                 }
             }
         }
@@ -37,7 +37,9 @@ pipeline {
         stage('Push Image to Docker Registry') {
             steps {
                 script {
-                    sh "docker push $IMAGE_NAME:latest"
+                    // Ensure the image is properly tagged before pushing
+                    sh "docker tag ${IMAGE_NAME}:latest ${REGISTRY}/${IMAGE_NAME}:latest"
+                    sh "docker push ${REGISTRY}/${IMAGE_NAME}:latest"
                 }
             }
         }
