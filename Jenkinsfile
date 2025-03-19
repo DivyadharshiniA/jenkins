@@ -2,12 +2,11 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "divyadharshini11"
+        IMAGE_NAME = "divyadharshini11/myapp"  // Updated with correct repository name
         REGISTRY = "docker.io"
         DOCKER_CREDENTIALS_ID = "docker"
         GITHUB_CREDENTIALS_ID = "github"
         APP_DIR = "/home/vboxuser/jenkins"
-
     }
 
     stages {
@@ -54,7 +53,7 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline executed successfully! '
+            echo 'Pipeline executed successfully!'
         }
         failure {
             echo 'Pipeline failed! Check the logs for errors.'
